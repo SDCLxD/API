@@ -6,10 +6,10 @@ const app = express();
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'root',
-  database: 'test'
+  host: '54.159.43.100',
+  user: 'mqnvirtu',
+  password: 'maquinavirtual',
+  database: 'wlsaid'
 });
 
 db.connect((error) => {
@@ -18,14 +18,14 @@ db.connect((error) => {
 });
 
 app.get('/whitelist/authentication', (req, res) => {
-  const { key } = req.query;
+  const { chave } = req.query;
   
-  if (!key) {
+  if (!chave) {
     return res.status(400).json({ message: 'No key provided' });
   }
 
-  const query = 'SELECT * FROM whitelist WHERE key = ?';
-  db.query(query, [key], (error, results) => {
+  const query = 'SELECT * FROM whitelist WHERE chave = ?';
+  db.query(query, [chave], (error, results) => {
     if (error) throw error;
 
     if (results.length > 0) {
