@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: '54.159.43.100',
+  host: '34.228.105.30',
   user: 'saidvm',
   password: 'senha123',
   database: 'wlsaid'
