@@ -100,5 +100,5 @@ app.post('/rc/snd', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 7491;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
