@@ -36,5 +36,5 @@ app.get('/whitelist/authentication', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7491;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); 
