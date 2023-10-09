@@ -23,7 +23,7 @@ app.post('api/auth/whitelist/script.lua', (req, res) => {
 
   const rng_value = rng;
   const modifiedRng = (rng_value - 6 + 5 * 4 / 3) % 2;
-  const url = 
+  const url = "https://raw.githubusercontent.com/SDCLxD/API/master/lua";
 
   if (!chave1 || !hwide || !rng) {
     return res.status(400).json({ Error: 'Chave ou HWID não fornecido, resposta inválida.' });
