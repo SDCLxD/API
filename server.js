@@ -26,7 +26,7 @@ app.post('/script/whitelist', (req, res) => {
   const { chave } = req.query;
 
   if (!chave1 || !hwide) {
-    return res.status(400).json({ message: 'Chave ou HWID não fornecido' });
+    return res.status(400).json({ erros: 'Chave ou HWID não fornecido' });
   }
 
   const luaScript = `
