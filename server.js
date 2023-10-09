@@ -17,6 +17,10 @@ db.connect((error) => {
   console.log('Conectado ao servidor MySQL.');
 });
 
+app.get('/get', function(req, res) {
+  res.send("Olá");
+});
+
 app.post('api/auth/whitelist/script.lua', (req, res) => {
   const { chave1, hwide, rng } = req.body;
   const { chave } = req.query;
