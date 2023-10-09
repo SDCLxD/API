@@ -136,7 +136,9 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
                 },
                 Body = game:GetService("HttpService"):JSONEncode(Data2)
             })
-            jsonResponse22 = game.HttpService:JSONDecode(response22.url)
+            jsonResponse22 = game.HttpService:JSONDecode(response22)
+
+            print("oláa")
         end
     end
 else
