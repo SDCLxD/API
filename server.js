@@ -26,7 +26,7 @@ app.post('/script/whitelist', (req, res) => {
   const { chave } = req.query;
 
   if (!chave1 || !hwide) {
-    return res.status(400).json({ erros: 'Chave ou HWID não fornecido' });
+    return res.status(400).json({ statuus: 'Chave ou HWID não fornecido' });
   }
 
   const luaScript = `
@@ -54,9 +54,9 @@ app.post('/script/whitelist', (req, res) => {
           console.log('HWID atualizado para:', hwide);
         });
       } else if (whitelistEntry.hwid === hwide) {
-        res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
+        res.status(200).json({ statuus: 'Whitelist realizada com sucesso', script: luaScript });
       } else {
-        res.status(403).json({ message: 'Chave ou HWID inválidos.', erros: '[Verify] HWID does not match key, ask for an HWID reset' });
+        res.status(403).json({ statuus: '[Verify] HWID does not match key, ask for an HWID reset' });
       }
     }
   });
@@ -68,7 +68,7 @@ app.post('/api/auth', (req, res) => {
   const modifiedRng = (rng_value - 6 + 5 * 4 / 3) % 2;
   
   if (!rng) {
-    return res.status(400).json({ message: 'RNG ausente' });
+    return res.status(400).json({ statuus: 'RNG ausente' });
   }
   
   console.log('Valor RNG recebido:', rng);
@@ -77,7 +77,7 @@ app.post('/api/auth', (req, res) => {
   if (modifiedRng === 1.6666666666860692 ) {
       res.status(200).json({ rng: modifiedRng });
     } else {
-      res.status(403).json({ erros: 'Someone tried to crack, or just a whitelist error.' });
+      res.status(403).json({ statuus: 'Someone tried to crack, or just a whitelist error.' });
     }
   });
 
@@ -89,7 +89,7 @@ app.post('/rc/snd', (req, res) => {
   const { chave } = req.query;
   
   if (!chave1 || !hwid1 || !ip) {
-    return res.status(400).json({ erros: 'Something went wrong.' });
+    return res.status(400).json({ statuus: 'Something went wrong.' });
   }
 
     const query = 'SELECT * FROM whitelist WHERE chave = ?';
@@ -105,9 +105,9 @@ app.post('/rc/snd', (req, res) => {
               console.log('HWID atualizado para:', hwid1);
           });
         }
-        res.status(200).json({ message: 'User found!' });
+        res.status(200).json({ statuus: 'User found!' });
       } else {
-        res.status(403).json({ erros: 'User not found.' });
+        res.status(403).json({ statuus: 'User not found.' });
       }
     });
 });
