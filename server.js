@@ -49,7 +49,100 @@ app.post('api/auth/whitelist/script.lua', (req, res) => {
           console.log('HWID atualizado para:', hwide);
         });
       } else if (whitelistEntry.hwid === hwide || modifiedRng === 1.6666666666860692) {
-        res.status(200).json({ message: 'Whitelist realizada com sucesso', rng: modifiedRng, url: script });
+        res.status(200).json({ message: 'Whitelist realizada com sucesso', rng: modifiedRng});
+        const luaScript = `
+          getgenv().fastfarm = true
+
+          function findneck()
+          	local old = game.Players.LocalPlayer.CameraMinZoomDistance
+          	local old2 = game.Players.LocalPlayer.CameraMaxZoomDistance
+              local data = game.ReplicatedStorage["Stats"..game.Players.LocalPlayer.Name]
+          
+              if data.Stats.Peli.Value < 300 then
+                  local vt = 500
+                  local pl = game.Players.LocalPlayer.Character.HumanoidRootPart
+                  local CFrameEnd = CFrame.new(1009.09015, 8.99998474, 1179.3689)
+                  local info = TweenInfo.new((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).magnitude / vt,Enum.EasingStyle.Linear)
+                  local tween = game:GetService("TweenService"):Create(pl, info, {CFrame = CFrameEnd})
+                  tween:Play()
+                  tween.Completed:Wait()
+          
+              if tween.Completed then
+                  task.wait(2)
+                  local args = {
+                      [1] = {
+                          [1] = "takequest",
+                          [2] = "Find Sarah's necklace"
+                      }
+                  }
+          
+                  game:GetService("ReplicatedStorage").Events.Quest:InvokeServer(unpack(args))
+                  
+                  game.Players.LocalPlayer.CameraMinZoomDistance = 128
+          		game.Players.LocalPlayer.CameraMaxZoomDistance = 256
+          		game.Players.LocalPlayer.CameraMinZoomDistance = 256
+                  end
+              end
+          
+          	function GetNeak()
+              if Workspace.Effects:FindFirstChild("Folder") then
+          		for i, v in ipairs(Workspace.Effects.Folder:GetDescendants()) do
+          			if v.Name == "Part" and v.Parent.Name == "Folder" and v:FindFirstChild("Mesh") and v.Mesh.TextureId == "http://www.roblox.com/asset/?id=28461501" and v:FindFirstChild("ClickDetector") then
+          				return v
+          			end
+          		end
+          	end
+          	end
+          
+              for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+                  if child:IsA("BasePart") and child.CanCollide == true then
+                      child.CanCollide = false
+                  end
+              end
+                     
+          	repeat wait()
+              local cac = GetNeak()
+          	if cac then 
+          		local rac = cac.CFrame + Vector3.new(0,5,0)
+          		local vt = 500
+                  local pl = game.Players.LocalPlayer.Character.HumanoidRootPart
+                  local CFrameEnd = CFrame.new(rac.X, rac.Y, rac.Z)
+                  local info = TweenInfo.new((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).magnitude / vt,Enum.EasingStyle.Linear)
+                  local tween = game:GetService("TweenService"):Create(pl, info, {CFrame = CFrameEnd})
+                  tween:Play()
+                  tween.Completed:Wait()
+                  wait(1)
+          		if cac:FindFirstChild("ClickDetector") then 
+          			fireclickdetector(cac.ClickDetector,2)
+          		end
+          	end
+          	
+          	until data.Quest.CurrentQuest.Value=="None" or data.Quest.QuestProgress.Value==1
+          	local vt = 250
+          	local pl = game.Players.LocalPlayer.Character.HumanoidRootPart
+          	local CFrameEnd = CFrame.new(1009.09015, 8.99998474, 1179.3689)
+              local info = TweenInfo.new((game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).magnitude / vt,Enum.EasingStyle.Linear)
+              local tween = game:GetService("TweenService"):Create(pl, info, {CFrame = CFrameEnd})
+              tween:Play()
+          	tween.Completed:Wait()
+          	if tween.Completed then
+                  local args = {
+                      [1] = {
+                          [1] = "returnitem"
+                      }
+                  }
+          
+                  game:GetService("ReplicatedStorage").Events.Quest:InvokeServer(unpack(args))
+                  game.Players.LocalPlayer.Character.HumanoidRootPart.CanCollide = true
+                  game.Players.LocalPlayer.CameraMaxZoomDistance = old2
+                  game.Players.LocalPlayer.CameraMinZoomDistance = old
+              end
+          end
+          
+          findneck()
+        `;
+        res.set('Content-Type', 'text/plain');
+        res.send(luaScript);
       } else {
         res.status(403).json({ message: 'Chave ou HWID inválidos.', error: '[Verify] HWID does not match key, ask for an HWID reset' });
       }
