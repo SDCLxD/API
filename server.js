@@ -29,6 +29,18 @@ app.post('/script/whitelist', (req, res) => {
     return res.status(400).json({ message: 'Chave ou HWID não fornecido' });
   }
 
+  const luaScript = `
+          function fastfarm()
+              local data = game.ReplicatedStorage["Stats"..game.Players.LocalPlayer.Name]
+        
+              if data.Stats.Peli.Value < 300 then
+                  print("menos grana")
+              end
+          end
+          
+          fastfarm()
+        `;
+
   const query = 'SELECT * FROM whitelist WHERE chave = ?';
   db.query(query, [chave], (error, results) => {
     if (error) throw error;
@@ -42,20 +54,7 @@ app.post('/script/whitelist', (req, res) => {
           console.log('HWID atualizado para:', hwide);
         });
       } else if (whitelistEntry.hwid === hwide) {
-        res.status(200).json({ message: 'Whitelist realizada com sucesso' });
-        const luaScript = `
-          function fastfarm()
-              local data = game.ReplicatedStorage["Stats"..game.Players.LocalPlayer.Name]
-        
-              if data.Stats.Peli.Value < 300 then
-                  print("menos grana")
-              end
-          end
-          
-          fastfarm()
-        `;
-        res.set('Content-Type', 'text/plain');
-        res.send(luaScript);
+        res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
       } else {
         res.status(403).json({ message: 'Chave ou HWID inválidos.', erros: '[Verify] HWID does not match key, ask for an HWID reset' });
       }
