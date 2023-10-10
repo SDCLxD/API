@@ -54,7 +54,7 @@ db.query(query, [chave], (error, results) => {
         console.log('HWID atualizado para:', hwide);
       });
     } else if (whitelistEntry.hwid === hwide) {
-      res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
+      res.status(200).json({ suc: 'Whitelist realizada com sucesso', script: luaScript });
     } else if (chave === whitelistEntry.chave && whitelistEntry.hwid !== hwide) {
       res.status(403).json({ message: '[Verify] HWID does not match key, ask for an HWID reset' });
     } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== null) {
