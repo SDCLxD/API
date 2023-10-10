@@ -42,24 +42,27 @@ app.post('/script/whitelist', (req, res) => {
         `;
 
   const query = 'SELECT * FROM whitelist WHERE chave = ?';
-  db.query(query, [chave], (error, results) => {
-    if (error) throw error;
+db.query(query, [chave], (error, results) => {
+  if (error) throw error;
 
-    if (results.length > 0) {
-      const whitelistEntry = results[0];
-      if (whitelistEntry.hwid === null) {
-        const updateQuery = 'UPDATE whitelist SET hwid = ? WHERE chave = ?';
-        db.query(updateQuery, [hwide, chave], (updateError, updateResults) => {
-          if (updateError) throw updateError;
-          console.log('HWID atualizado para:', hwide);
-        });
-      } else if (whitelistEntry.hwid === hwide) {
-        res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
-      } else if (chave1 !== hwide){
-        res.status(403).json({ message2: '[Verify] HWID does not match key, ask for an HWID reset' });
-      }
+  if (results.length > 0) {
+    const whitelistEntry = results[0];
+    if (whitelistEntry.hwid === null) {
+      const updateQuery = 'UPDATE whitelist SET hwid = ? WHERE chave = ?';
+      db.query(updateQuery, [hwide, chave], (updateError, updateResults) => {
+        if (updateError) throw updateError;
+        console.log('HWID atualizado para:', hwide);
+      });
+    } else if (whitelistEntry.hwid === hwide) {
+      res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
+    } else if (chave === whitelistEntry.chave && whitelistEntry.hwid !== hwide) {
+      res.status(403).json({ message2: '[Verify] HWID does not match key, ask for an HWID reset' });
+    } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== null) {
+      res.status(403).json({ message: '[Verify] Ur Key does not match hwid, ask for !getinfo at discord.' });
     }
-  });
+  } else {
+    res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
+  }
 });
 
 app.post('/api/auth', (req, res) => {
