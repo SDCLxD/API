@@ -63,6 +63,7 @@ db.query(query, [chave], (error, results) => {
   } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== hwided {
     res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
   }
+}
 });
 });
 
