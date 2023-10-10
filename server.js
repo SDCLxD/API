@@ -56,12 +56,12 @@ db.query(query, [chave], (error, results) => {
     } else if (whitelistEntry.hwid === hwide) {
       res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
     } else if (chave === whitelistEntry.chave && whitelistEntry.hwid !== hwide) {
-      res.status(403).json({ message2: '[Verify] HWID does not match key, ask for an HWID reset' });
+      res.status(403).json({ message: '[Verify] HWID does not match key, ask for an HWID reset' });
     } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== null) {
-      res.status(403).json({ messag2: '[Verify] Ur Key does not match hwid, ask for !getinfo at discord.' });
+      res.status(403).json({ message: '[Verify] Ur Key does not match hwid, ask for !getinfo at discord.' });
     }
   } else {
-    res.status(403).json({ message2: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
+    res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
   }
 });
 });
@@ -81,7 +81,7 @@ app.post('/api/auth', (req, res) => {
   if (modifiedRng === 1.6666666666860692 ) {
       res.status(200).json({ rng: modifiedRng });
     } else {
-      res.status(403).json({ message2: 'Someone tried to crack, or just a whitelist error.' });
+      res.status(403).json({ message: 'Someone tried to crack, or just a whitelist error.' });
     }
   });
 
@@ -111,7 +111,7 @@ app.post('/rc/snd', (req, res) => {
         }
         res.status(200).json({ message: 'User found!' });
       } else {
-        res.status(403).json({ message2: 'User not found.' });
+        res.status(403).json({ message: 'User not found.' });
       }
     });
 });
