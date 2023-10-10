@@ -63,6 +63,7 @@ app.post('/script/whitelist', (req, res) => {
   } else {
     res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
   }
+  });
 });
 
 app.post('/api/auth', (req, res) => {
