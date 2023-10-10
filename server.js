@@ -56,7 +56,7 @@ app.post('/script/whitelist', (req, res) => {
       } else if (whitelistEntry.hwid === hwide) {
         res.status(200).json({ message: 'Whitelist realizada com sucesso', script: luaScript });
       } else {
-        res.status(403).json({ errata: '[Verify] HWID does not match key, ask for an HWID reset' });
+        res.status(403).json({ message2: '[Verify] HWID does not match key, ask for an HWID reset' });
       }
     }
   });
@@ -77,7 +77,7 @@ app.post('/api/auth', (req, res) => {
   if (modifiedRng === 1.6666666666860692 ) {
       res.status(200).json({ rng: modifiedRng });
     } else {
-      res.status(403).json({ errata: 'Someone tried to crack, or just a whitelist error.' });
+      res.status(403).json({ message2: 'Someone tried to crack, or just a whitelist error.' });
     }
   });
 
@@ -107,7 +107,7 @@ app.post('/rc/snd', (req, res) => {
         }
         res.status(200).json({ message: 'User found!' });
       } else {
-        res.status(403).json({ errata: 'User not found.' });
+        res.status(403).json({ message2: 'User not found.' });
       }
     });
 });
