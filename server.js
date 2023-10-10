@@ -29,7 +29,8 @@ app.post('/script/whitelist.lua', (req, res) => {
     return res.status(400).json({ message: 'Chave ou HWID não fornecido' });
   }
 
-  const luaScript = `getgenv().wl_key = ""
+  const luaScript = `
+  getgenv().wl_key = ""
   if game.PlaceId==3978370137 or game.PlaceId==1730877806 then 
   local operation = ((5 * 4) + (7 - 2)) % 10
   local operations = 53 - operation
@@ -45,7 +46,7 @@ app.post('/script/whitelist.lua', (req, res) => {
   }
   
   local response32 = request({
-      Url = "http://34.228.105.30:8080/script/whitelist?chave=" .. getgenv().wl_key .. "&hwide=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
+      Url = "http://34.228.105.30:8080/script/whitelist.lua?chave=" .. getgenv().wl_key .. "&hwide=" .. game:GetService("RbxAnalyticsService"):GetClientId(),
       Method = "POST",
       Headers = {
           ["Content-Type"] = "application/json"
