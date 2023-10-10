@@ -60,7 +60,7 @@ app.post('/script/whitelist', (req, res) => {
     } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== null) {
       res.status(403).json({ message: '[Verify] Ur Key does not match hwid, ask for !getinfo at discord.' });
     } 
-  else {
+    { else {
       res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
     }
   });
