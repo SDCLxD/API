@@ -64,6 +64,7 @@ db.query(query, [chave], (error, results) => {
     res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
   }
 });
+});
 
 app.post('/api/auth', (req, res) => {
   const { rng } = req.body;
