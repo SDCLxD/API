@@ -59,10 +59,10 @@ app.post('/script/whitelist', (req, res) => {
       res.status(403).json({ message: '[Verify] HWID does not match key, ask for an HWID reset' });
     } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== null) {
       res.status(403).json({ message: '[Verify] Ur Key does not match hwid, ask for !getinfo at discord.' });
-    } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== hwide
-    res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
-  }
-});
+    } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== hwide)
+      res.status(403).json({ message: '[Possible Cracking] Ur IP will be blacklisted from whitelist permanently! if this is a mistake, contact Saidbr' });
+    }
+  });
 });
 
 app.post('/api/auth', (req, res) => {
