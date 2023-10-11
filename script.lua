@@ -1655,9 +1655,8 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
                     end)
 
                     if Settings.FastFarm then
-                        function findneck()
-                            getgenv().fastfarm = state
-                            if getgenv().fastfarm == true then
+                    function findneck()
+                        if Settings.FastFarm then
                             local old = game.Players.LocalPlayer.CameraMinZoomDistance
                             local old2 = game.Players.LocalPlayer.CameraMaxZoomDistance
                             local data = game.ReplicatedStorage["Stats"..game.Players.LocalPlayer.Name]
