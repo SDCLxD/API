@@ -1743,7 +1743,11 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
                         end
                     end
 
-                        findneck()
+                        while Settings.FastFarm and task.wait() do
+                            pcall(function()
+                                findneck()
+                            end)
+                        end
                     end
                 end
             end
