@@ -30,15 +30,6 @@ app.post('/script/whitelist', (req, res) => {
     return res.status(400).json({ message: 'Chave ou HWID não fornecido' });
   }
 
-  fs.readFile('ap/script.lua', 'utf8', (err, data) => {
-  if (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Erro ao ler o arquivo' });
-    return;
-  }
-  
-  const luaScript = data;
-
   const query = 'SELECT * FROM whitelist WHERE chave = ?';
   db.query(query, [chave], (error, results) => {
   if (error) throw error;
@@ -52,7 +43,7 @@ app.post('/script/whitelist', (req, res) => {
         console.log('HWID atualizado para:', hwide);
       });
     } else if (whitelistEntry.hwid === hwide) {
-      res.status(200).json({ suc: 'Whitelist realizada com sucesso', script: luaScript });
+      res.status(200).json({ suc: 'Whitelist realizada com sucesso' });
     } else if (chave === whitelistEntry.chave && whitelistEntry.hwid !== hwide) {
       res.status(403).json({ message: '[Verify] HWID does not match key, ask for an HWID reset' });
     } else if (chave !== whitelistEntry.chave && whitelistEntry.hwid !== null) {
