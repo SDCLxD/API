@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const fs = require('fs');
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,7 +30,14 @@ app.post('/script/whitelist.lua', (req, res) => {
     return res.status(400).json({ message: 'Chave ou HWID não fornecido' });
   }
 
-  const luaScript = `https://raw.githubusercontent.com/SDCLxD/API/master/script.lua`;
+  fs.readFile('ap/script.lua', 'utf8', (err, data) => {
+  if (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao ler o arquivo' });
+    return;
+  }
+  
+  const luaScript = data;
 
   const query = 'SELECT * FROM whitelist WHERE chave = ?';
   db.query(query, [chave], (error, results) => {
