@@ -1,3 +1,4 @@
+function whitelist()
 local operation = ((5 * 4) + (7 - 2)) % 10
 local operations = 53 - operation
 
@@ -1830,3 +1831,5 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
         game.Players.LocalPlayer:kick(jsonResponse.message)
     end
 end
+end
+whitelist()
