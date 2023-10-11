@@ -162,7 +162,7 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
                 local jsonResponse22 = game.HttpService:JSONDecode(response22.Body)
                 if jsonResponse22.message == "User found!" then
                     print("Authentified!")
-                    print("UserName: " .. jsonResponse22.UserName .. " UserID: " .. jsonResponse22.UserID)
+                    print("UserName: " .. jsonResponse22.UserName .. " UserID: " .. jsonResponse22.UserId)
 
                     local Library = {}
 
