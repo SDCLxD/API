@@ -1502,15 +1502,6 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
                     if not getgenv().tvk then getgenv().tvk={} end
                     for k,v in pairs(getgenv().tvk) do v.On=false end
 
-                    local Settings = {
-                        AutoStat = {
-                            Strength = false,
-                            Stamina = false,
-                            Defense = false,
-                            GunMastery = false,
-                            SwordMastery = false
-                        }
-                    }
                     local Temp = {
                         Nodrown = {},
                         Noclip = {},
@@ -1661,11 +1652,11 @@ if whitelisted and jsonResponse1.rng == 1.6666666666860692 then
 
                     MainFarm:AddToggle("Fast Farm", {Toggled = Settings.FastFarm, Description = "Farm peli, and go to fishman island farm until level max"}, function(state)
                         Settings.FastFarm = state
-                        getgenv().fastfarm = state
                     end)
 
                     if Settings.FastFarm then
                         function findneck()
+                            getgenv().fastfarm = state
                             if getgenv().fastfarm == true then
                             local old = game.Players.LocalPlayer.CameraMinZoomDistance
                             local old2 = game.Players.LocalPlayer.CameraMaxZoomDistance
