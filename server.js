@@ -98,7 +98,7 @@ app.post('/rc/snd', (req, res) => {
               console.log('HWID atualizado para:', hwid1);
           });
         }
-        res.status(200).json({ message: 'User found!', UserName: user.username, UserId: user.userid });
+        res.status(200).json({ message: 'User found!', username: user.username, userid: user.userid });
         console.log('Execução feita! Usuário:', user.username, 'UserID:', user.userid);
       } else {
         res.status(403).json({ message: 'User not found.' });
