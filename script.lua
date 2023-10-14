@@ -15,7 +15,7 @@ function whitelist()
     }
     
     local response32 = request({
-        Url = "https://saidhub.store/script/whitelist?chave=" .. getgenv().wl_key .. "&hwide=" .. game:GetService("RbxAnalyticsService"):GetClientId(), "&i=" .. i,
+        Url = "https://saidhub.store/script/whitelist?chave=" .. getgenv().wl_key .. "&hwide=" .. game:GetService("RbxAnalyticsService"):GetClientId(), "&i=" .. IPv4,
         Method = "POST",
         Headers = {
             ["Content-Type"] = "application/json"
