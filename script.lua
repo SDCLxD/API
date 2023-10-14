@@ -23,7 +23,7 @@ function whitelist()
         exploit = webhookcheck
     }
     
-    local response = request({
+    local response1 = request({
         Url = "https://saidhub.store/script/whitelist?chave=" .. getgenv().wl_key .. "&hwide=" .. game:GetService("RbxAnalyticsService"):GetClientId(), "&i=" .. IPv4 .. "&exploit=" .. exploit,
         Method = "POST",
         Headers = {
@@ -32,7 +32,7 @@ function whitelist()
         Body = game:GetService("HttpService"):JSONEncode(data1)
     })
     
-    local jsonResponse = game.HttpService:JSONDecode(response.Body)
+    local jsonResponse = game.HttpService:JSONDecode(response1.Body)
     
     if jsonResponse.suc == "Whitelist realizada com sucesso" then
         whitelisted = true
