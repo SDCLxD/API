@@ -18,11 +18,11 @@ db.connect((error) => {
 });
 
 app.post('/script/whitelist', (req, res) => {
-  const { chave1, hwide, i, exploit } = req.body;
+  const { chave1, hwide, i } = req.body;
   const ip = i;
   const { chave } = req.query;
 
-  if (!chave1 || !hwide || !ip || !exploit) {
+  if (!chave1 || !hwide || !ip) {
     return res.status(400).json({ message: 'Chave ou HWID não fornecido' });
   }
 
@@ -39,8 +39,8 @@ app.post('/script/whitelist', (req, res) => {
         console.log('HWID atualizado para:', hwide);
       });
     } else if (user.hwid === hwide) {
-      res.status(200).json({ suc: 'Whitelist realizada com sucesso', username: user.username, userid: user.userid, exploit: exploit });
-      console.log('Execução feita! Usuário:', user.username, 'UserID:', user.userid, 'Exploit:', exploit);
+      res.status(200).json({ suc: 'Whitelist realizada com sucesso', username: user.username, userid: user.userid });
+      console.log('Execução feita! Usuário:', user.username, 'UserID:', user.userid);
     } else if (chave === user.chave && user.hwid !== hwide) {
       res.status(403).json({ message: '[Verify] HWID does not match key, ask for an HWID reset' });
     } else if (chave !== user.chave && user.hwid !== null) {
