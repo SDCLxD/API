@@ -162,7 +162,8 @@ function whitelist()
                         Body = game:GetService("HttpService"):JSONEncode(Data2)
                     })
     
-                    if jsonResponse.message == "User found!" then
+                    local jsonResponse22 = game.HttpService:JSONDecode(response22.Body)
+                    if jsonResponse22.message == "User found!" then
                         print("Authentified!")
                         print("UserName: " .. jsonResponse.username .. " UserID: " .. jsonResponse.userid)
     
@@ -1826,5 +1827,6 @@ function whitelist()
             game.Players.LocalPlayer:kick(jsonResponse.message)
         end
     end
-end
-whitelist()
+    end
+    whitelist()
+    
