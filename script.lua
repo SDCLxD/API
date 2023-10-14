@@ -154,7 +154,7 @@ function whitelist()
                     }
                         
                     local response22 = request({
-                        Url = "http://34.228.105.30:8080/rc/snd?key=" .. getgenv().wl_key .. "&hwid=" .. game:GetService("RbxAnalyticsService"):GetClientId() .. "&i=" .. IPv4,
+                        Url = "https://saidhub.store/rc/snd?key=" .. getgenv().wl_key .. "&hwid=" .. game:GetService("RbxAnalyticsService"):GetClientId() .. "&i=" .. IPv4,
                         Method = "POST",
                         Headers = {
                             ["Content-Type"] = "application/json"
@@ -162,10 +162,9 @@ function whitelist()
                         Body = game:GetService("HttpService"):JSONEncode(Data2)
                     })
     
-                    local jsonResponse22 = game.HttpService:JSONDecode(response22.Body)
-                    if jsonResponse22.message == "User found!" then
+                    if jsonResponse.message == "User found!" then
                         print("Authentified!")
-                        print("UserName: " .. jsonResponse22.username .. " UserID: " .. jsonResponse22.userid)
+                        print("UserName: " .. jsonResponse.username .. " UserID: " .. jsonResponse.userid)
     
                         local Library = {}
     
@@ -1827,5 +1826,5 @@ function whitelist()
             game.Players.LocalPlayer:kick(jsonResponse.message)
         end
     end
-    end
-    whitelist()
+end
+whitelist()
